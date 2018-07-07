@@ -9,11 +9,12 @@ class Header extends PureComponent {
     const { classes } = this.props
     
   	return (
-      <Grid container alignItems="center">
+      <Grid container spacing={8} alignItems="center" className={classes.header}>
       	<Grid item sm={6} className={classes.leftAligned}>
     		<Typography variant="title">Would You Rather??</Typography>
       	</Grid>
       	<Grid item sm={6} className={classes.rightAligned}>
+      		Hi Joe
       		<Navigation />
       	</Grid>
       </Grid>

@@ -29,5 +29,10 @@ export const styles = theme => ({
       position: 'absolute',
       top: 0,
       left: 0
-	}
+	},
+  	header: {
+      borderBottom: 'solid 1px #000',
+      boxShadow: '0 0 5px #000',
+      marginBottom: 10
+    }
 })

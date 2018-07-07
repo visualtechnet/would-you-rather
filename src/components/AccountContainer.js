@@ -7,6 +7,7 @@ import { styles } from '../assets/styles'
 class AccountContainer extends PureComponent {
 	
 	render() {
+      	const { children } = this.props 
     	return (
         	<Grid container direction="column">
           		<Grid item>
@@ -20,7 +21,7 @@ class AccountContainer extends PureComponent {
     }
 }
 
-AccountController.propTypes = {
+AccountContainer.propTypes = {
   	classes: PropTypes.any,
 	children: PropTypes.any
 }
