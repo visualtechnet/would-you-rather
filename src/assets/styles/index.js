@@ -21,5 +21,13 @@ export const styles = theme => ({
       display: 'flex',
       justifyContent: 'flex-end',
       alignItems: 'center'
-    }
+    },
+  	relative: {
+      position: 'relative'
+    },
+  	absolute: {
+      position: 'absolute',
+      top: 0,
+      left: 0
+	}
 })

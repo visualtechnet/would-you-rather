@@ -1,13 +1,21 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react'
+import { Router, Route, Switch } from 'react-router-dom'
+import createBrowserHistory from 'history/createBrowserHistory'
+import Login from './Login'
+import Home from './account/Home'
 
-class App extends Component {
+const history = createBrowserHistory()
+
+class App extends PureComponent {
   render() {
     return (
-      <div className="App">        
-        <p className="App-intro">
-          Stuff here
-        </p>
-      </div>
+      <Router history={history}>
+      	<Switch>
+      	  <Route exact component={Login} path="/" />
+          <Route component={Login} path="/login" />
+          <Route component={Home} path="/account/home" />
+      	</Switch>
+      </Router>
     );
   }
 }
