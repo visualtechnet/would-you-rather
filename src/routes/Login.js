@@ -25,7 +25,7 @@ class Login extends PureComponent {
   render() {
     return (
       <Container>
-       	<form onChange={this.login}>
+       	<form onSubmit={this.login}>
           <Grid container spacing={8} direction="column" justify="center" alignItems="center">
               <Grid item>
                   <Typography variant="title">
