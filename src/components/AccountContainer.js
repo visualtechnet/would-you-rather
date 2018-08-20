@@ -8,6 +8,7 @@ class AccountContainer extends PureComponent {
 	
 	render() {
       	const { children } = this.props 
+        
     	return (
         	<Grid container direction="column">
           		<Grid item>

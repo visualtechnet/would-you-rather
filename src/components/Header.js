@@ -3,10 +3,11 @@ import PropTypes from 'proptypes'
 import Navigation from '../components/Navigation'
 import { Grid, Typography, withStyles } from '@material-ui/core'
 import { styles } from '../assets/styles'
+import { connect } from 'react-redux'
 
 class Header extends PureComponent {
   render() {
-    const { classes } = this.props
+    const { classes, user } = this.props
     
   	return (
       <Grid container spacing={8} alignItems="center" className={classes.header}>
@@ -14,7 +15,7 @@ class Header extends PureComponent {
     		<Typography variant="title">Would You Rather??</Typography>
       	</Grid>
       	<Grid item sm={6} className={classes.rightAligned}>
-      		Hi Joe
+      		Hi { user.name }
       		<Navigation />
       	</Grid>
       </Grid>
@@ -23,10 +24,15 @@ class Header extends PureComponent {
 }
 
 Header.propTypes = {
-	classes: PropTypes.any
+	classes: PropTypes.any,
+  	user: PropTypes.object.isRequired
 }
 
-Header = withStyles(styles)(Header)
+const mapStateToProps = state => ({
+	user: state.login.user
+})
+
+Header = withStyles(styles)(connect(mapStateToProps)(Header))
 
 export default Header
 

@@ -38,7 +38,7 @@ let questions = {
   "8xf0y6ziyjabvozdd253nd": {
     id: '8xf0y6ziyjabvozdd253nd',
     author: 'sarahedo',
-    timestamp: 1467166872634,
+    timestamp: 1467166872634,    
     optionOne: {
       votes: ['sarahedo'],
       text: 'have horrible short term memory',
@@ -199,4 +199,8 @@ export function _saveQuestionAnswer ({ authedUser, qid, answer }) {
       res()
     }, 500)
   })
+}
+
+export const allUsers = () => {  	
+	return users;
 }
