@@ -74,8 +74,19 @@ npm start
 │   ├── favicon.ico # React Icon, You may change if you wish.
 │   └── index.html # DO NOT MODIFY
 └── src
-	├── components
-    │   ├── 
+	├── assets
+	├── components # Contains all the components
+    ├── constants # Contains constants used for state management
+    ├── data # Contains all the original questions
+    ├── routes # Contains all the routes
+    |	└── account # Contains all the authenticated pages
+    ├── state # Contains all state management related reducers and actions
+    |	├── leaderboard
+    |	├── login
+    |	├── navigation
+    |	├── poll
+    |	├── user
+    ├── utilities # All utilities
     ├── App.css # Styles for your app. Feel free to customize this as you desire.
     ├── App.js # This is the root of your app. Contains static HTML right now.    
     ├── index.css # Global styles. You probably won't need to change anything here.
