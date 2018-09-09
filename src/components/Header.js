@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'proptypes'
 import Navigation from '../components/Navigation'
-import { Grid, Typography, withStyles } from '@material-ui/core'
+import { Grid, Avatar, Typography, withStyles } from '@material-ui/core'
 import { styles } from '../assets/styles'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 class Header extends PureComponent {
@@ -12,9 +13,10 @@ class Header extends PureComponent {
   	return (
       <Grid container spacing={8} alignItems="center" className={classes.header}>
       	<Grid item sm={6} className={classes.leftAligned}>
-    		<Typography variant="title">Would You Rather??</Typography>
+    		<Link to='/account/home'><Typography variant="title">Would You Rather??</Typography></Link>
       	</Grid>
       	<Grid item sm={6} className={classes.rightAligned}>
+			<Avatar alt={user.name} src={user.avatarURL} />&nbsp;&nbsp;
       		Hi { user.name }
       		<Navigation />
       	</Grid>

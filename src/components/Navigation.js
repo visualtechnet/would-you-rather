@@ -51,6 +51,7 @@ class Navigation extends PureComponent {
                 onClose={this.handleCloseNav}>
                 <Link to="/account/home"><MenuItem>Home</MenuItem></Link>
                 <Link to="/account/add"><MenuItem>Add</MenuItem></Link>				
+				<Link to="/account/leaderboard"><MenuItem>Leaderboard</MenuItem></Link>				
                 <MenuItem onClick={this.logOut}>Log Out</MenuItem>
               </Menu>
            </Paper>

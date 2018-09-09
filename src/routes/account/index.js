@@ -1,3 +1,4 @@
 export * from './Home'
-export * from './Detail'
 export * from './AddQuestion'
+export * from './Questions'
+export * from './Leaderboard'

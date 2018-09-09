@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux'
 import { login } from './login/reducer'
-import { add } from './add/reducer'
 import { poll } from './poll/reducer'
+import { user } from './user/reducer'
+import { leaderboard } from './leaderboard/reducer'
 
 const reducers = combineReducers({
-	add,
 	login,
- 	poll
+ 	poll,
+  	user,
+  	leaderboard
 });
 
 export default reducers;
