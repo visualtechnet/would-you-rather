@@ -4,20 +4,10 @@ import createBrowserHistory from 'history/createBrowserHistory'
 import Login from './Login'
 import { Home, AddQuestion, Questions, Leaderboard } from './account'
 import PageNotFound from './PageNotFound'
-import { connect } from 'react-redux'
-import _ from 'lodash'
 
 const history = createBrowserHistory()
 
-class App extends PureComponent {
-  constructor(props){
-  	super(props)
-    
-    if(!props.currentLoginUser || _.isEmpty(props.currentLoginUser)) {
-    	window.location = '/login';
-    }    
-  }
-  
+class App extends PureComponent {      
   render() {
     return (
       <Router history={history}>
@@ -36,11 +26,5 @@ class App extends PureComponent {
     );
   }
 }
-
-const mapStateToProps = state => ({
-	currentLoginUser: state.login.user
-})
-
-App = connect(mapStateToProps)(App)
 
 export default App;
