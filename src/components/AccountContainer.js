@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'proptypes'
 import { Grid, withStyles } from '@material-ui/core'
-import Header from './Header'
+import { Header } from './Header'
 import { styles } from '../assets/styles'
+import { MainNavigation } from './MainNavigation'
 
 class AccountContainer extends PureComponent {
 	
@@ -14,9 +15,13 @@ class AccountContainer extends PureComponent {
           		<Grid item>
           			<Header />
           		</Grid>
+          		<Grid item>					
+					<MainNavigation />
+          			<hr /><br />
+				</Grid>
           		<Grid item>
-          			{ children }
-          		</Grid>
+          			{ children }  
+          		</Grid>				
           	</Grid>
         )
     }
@@ -28,3 +33,5 @@ AccountContainer.propTypes = {
 }
 
 AccountContainer = withStyles(styles)(AccountContainer)
+
+export { AccountContainer }

@@ -1,14 +1,38 @@
 import * as moment from 'moment'
 import React, { PureComponent } from 'react'
 import PropTypes from 'proptypes'
-import { Grid, Typography, List, ListItem, Avatar, ListItemText, Button } from '@material-ui/core'
-import Header from '../../components/Header'
+import { Grid, Typography, List, ListItem, Avatar, ListItemText } from '@material-ui/core'
+import { withStyles } from '@material-ui/core/styles';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { AccountContainer } from '../../components'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getPolls, getCategoryPolls, setPollQuestion } from '../../state/poll/actions'
 import { getUsers } from '../../state/user/actions'
-import NavigationIcon from '@material-ui/icons/Navigation'
 import { withRouter } from 'react-router'
+
+const styles = theme => ({
+  root: {
+    width: '100%',
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    flexBasis: '33.33%',
+    flexShrink: 0,
+  },
+  secondaryHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    color: theme.palette.text.secondary,
+  },
+  expandedPanel: {
+  	fontWeight: 'bold',
+    color: theme.palette.text.info
+  }
+  
+});
 
 class Home extends PureComponent {
   	constructor(props) {
@@ -17,9 +41,16 @@ class Home extends PureComponent {
       this.state = {
       	isLoaded: false,
         unanswered: false,
-        answerered: false
+        answerered: false,
+        expanded: null
       }
     }
+  
+    handleChange = panel => (event, expanded) => {
+      this.setState({
+        expanded: expanded ? panel : false,
+      });
+    };
   
   	componentWillMount() {
   		const { polls, getPolls, getCategoryPolls, getUsers, user, users } = this.props;
@@ -51,55 +82,63 @@ class Home extends PureComponent {
     }
   
 	render() {
-      	const { unansweredPolls, answeredPolls } = this.props
+      	const { unansweredPolls, answeredPolls, classes } = this.props
         
     	return (
-          <Grid container spacing={8} direction="column">
-          	<Grid item>
-          		<Header />
-          	</Grid> 
-          	<Grid item>								
-        		<Typography variant="title">
-          			Unanswered&nbsp;<Button variant="extendedFab" onClick={this.toggle('unanswered')}><NavigationIcon size="small" />Toggle</Button>
-          		</Typography>
-				{ this.state.unanswered && (<div name="unanswered">
-					<List>
-						{
-                        	unansweredPolls.map(poll => {
-                        		return (                 					
-                 				  <a key={poll.id} onClick={e => this.onQuestion(poll)}>
-                                    <ListItem>	
-                                      <Avatar src={poll.photo}></Avatar>									
-                                      <ListItemText primary={`${poll.author}`} secondary={`Created on ${moment.parseZone(poll.timestamp).format("MM/DD/YYYY HH:MM A")}`} />
-                                    </ListItem>
-								  </a>	
-                          		)
-                        	})
-                        }						
-					</List>
-				</div>) }
-          		<hr />
-          		<Typography variant="title">
-          			Answered&nbsp;<Button variant="extendedFab" onClick={this.toggle('answered')}><NavigationIcon size="small" />Toggle</Button>
-          		</Typography>
-				<div name="answered">
-					<List>
-						{
-                        	answeredPolls.map(poll => {
-                        		return (
-                                  <a key={poll.id} onClick={e => this.onQuestion(poll)}>
-                                    <ListItem>	
-                                      <Avatar src={poll.photo}></Avatar>
-                                      <ListItemText primary={poll.author} secondary={`Created on ${moment.parseZone(poll.timestamp).format("MM/DD/YYYY HH:MM A")}`} />
-                                    </ListItem>
-                                  </a>
-                          		)
-                        	})
-                        }						
-					</List>
-				</div>          		
-          	</Grid>
-          </Grid>
+          <AccountContainer>          
+            <Grid container spacing={8} direction="column">              
+              <Grid item>
+                  <ExpansionPanel defaultExpanded={true}>
+                      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                        <Typography className={classes.heading} variant="title">Unanswered Poll Questions</Typography>
+                        <Typography className={classes.secondaryHeading}></Typography>
+                      </ExpansionPanelSummary>
+                      <ExpansionPanelDetails>
+                          <div name="unanswered">
+                              <List>
+                                  {
+                                      unansweredPolls.map(poll => {
+                                          return (                 					
+                                            <a key={poll.id} onClick={e => this.onQuestion(poll)}>
+                                              <ListItem>	
+                                                <Avatar src={poll.photo}></Avatar>									
+                                                <ListItemText primary={`${poll.name} (${poll.author})`} secondary={`Created on ${moment.parseZone(poll.timestamp).format("MM/DD/YYYY HH:MM A")}`} />
+                                              </ListItem>
+                                            </a>	
+                                          )
+                                      })
+                                  }
+                              </List>
+                          </div>                     
+                      </ExpansionPanelDetails>
+                  </ExpansionPanel>        		
+                  <ExpansionPanel>
+                      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                        <Typography className={classes.heading} variant="title">Answered Poll Questions</Typography>
+                        <Typography className={classes.secondaryHeading}></Typography>
+                      </ExpansionPanelSummary>
+                      <ExpansionPanelDetails>
+                          <div name="answered">
+                              <List>
+                                  {
+                                      answeredPolls.map(poll => {
+                                          return (
+                                            <a key={poll.id} onClick={e => this.onQuestion(poll)}>
+                                              <ListItem>	
+                                                <Avatar src={poll.photo}></Avatar>
+                                                <ListItemText primary={poll.author} secondary={`Created on ${moment.parseZone(poll.timestamp).format("MM/DD/YYYY HH:MM A")}`} />
+                                              </ListItem>
+                                            </a>
+                                          )
+                                      })
+                                  }						
+                              </List>
+                          </div>    
+                      </ExpansionPanelDetails>
+                  </ExpansionPanel>
+              </Grid>
+            </Grid>
+		 </AccountContainer>
         )
     }
 }
@@ -110,7 +149,8 @@ Home.propTypes = {
   	getPolls: PropTypes.any,
   	getCategoryPolls: PropTypes.any,
   	answeredPolls: PropTypes.array,
-  	unansweredPolls: PropTypes.array
+  	unansweredPolls: PropTypes.array,
+	classes: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -128,6 +168,6 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 	setPollQuestion
 }, dispatch)
 
-Home = connect(mapStateToProps, mapDispatchToProps)(withRouter(Home))
+Home = connect(mapStateToProps, mapDispatchToProps)(withRouter(withStyles(styles)(Home)))
 
 export { Home }

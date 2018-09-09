@@ -63,4 +63,4 @@ class Navigation extends PureComponent {
 
 Navigation = withRouter(withStyles(styles)(Navigation))
 
-export default Navigation
+export { Navigation }

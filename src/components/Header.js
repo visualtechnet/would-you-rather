@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'proptypes'
-import Navigation from '../components/Navigation'
+import { Navigation } from '../components'
 import { Grid, Avatar, Typography, withStyles } from '@material-ui/core'
 import { styles } from '../assets/styles'
 import { Link } from 'react-router-dom'
@@ -36,5 +36,5 @@ const mapStateToProps = state => ({
 
 Header = withStyles(styles)(connect(mapStateToProps)(Header))
 
-export default Header
+export { Header }
 
