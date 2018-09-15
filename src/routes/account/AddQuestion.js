@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'proptypes'
-import { Grid, Typography, TextField, Button } from '@material-ui/core'
+import { Grid, Typography, Button, FormControl, Input, InputLabel, FormHelperText } from '@material-ui/core'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { AccountContainerWithStyles } from '../../components'
@@ -46,8 +46,11 @@ class AddQuestion extends PureComponent {
           	photo: currentUser.avatarURL,
           	name: currentUser.name
         }        
-        AddPollQuestion(pollQuestion);
-      	history.push('/account/home');
+        if(this.state.question1.length > 0 && this.state.question2.length > 0)
+        	AddPollQuestion(pollQuestion);
+      	else 
+          alert('All field are required');
+      	history.push('/home');
     }
   
 	render() {
@@ -58,9 +61,27 @@ class AddQuestion extends PureComponent {
                       <Grid container direction="column" justify="center" alignItems="center">
                           <Typography variant="display1">
                             Would You Rather
-                          </Typography> 
-                          <TextField name="question1" value={this.state.question1} onChange={e => this.handleChange(e)} label='Question 1' />
-                          <TextField name="question2" value={this.state.question2} onChange={e => this.handleChange(e)} label='Question 2' /><br />
+                          </Typography><br />
+             			  { this.state.question1.trim().length === 0 ? (<FormControl>
+             				<InputLabel htmlFor="question1">Question 1</InputLabel>
+                          	<Input id="question1" error name="question1" value={this.state.question1} onChange={e => this.handleChange(e)} label='Question 1' />
+							<FormHelperText id="question1-label-text" error><small><i>This field is required</i></small></FormHelperText>
+						  </FormControl>) :  (<FormControl>
+             				<InputLabel htmlFor="question1">Question 1</InputLabel>
+                          	<Input id="question1" name="question1" value={this.state.question1} onChange={e => this.handleChange(e)} label='Question 1' />
+							<FormHelperText id="question1-label-text"><small><i>This field is required</i></small></FormHelperText>
+						  </FormControl>)}
+						  { this.state.question2.trim().length === 0 ? (<FormControl>
+             				<InputLabel htmlFor="question1">Question 2</InputLabel>
+                          	<Input id="question2" error name="question2" value={this.state.question2} onChange={e => this.handleChange(e)} label='Question 2' />
+							<FormHelperText id="question1-label-text" error ><small><i>This field is required</i></small></FormHelperText>
+						  </FormControl>) : (<FormControl>
+             				<InputLabel htmlFor="question1">Question 2</InputLabel>
+                          	<Input id="question2" 								
+								name="question2" value={this.state.question2} onChange={e => this.handleChange(e)} label='Question 2' />
+							<FormHelperText id="question1-label-text"><small><i>This field is required</i></small></FormHelperText>
+						  </FormControl>) }
+						  <br />
                           <Grid container spacing={16} justify="center" alignItems="center">
                             <Button color="primary" variant="raised" size="small" onClick={e => this.goBack()}>GO BACK</Button>&nbsp;
                             <Button color="primary" variant="raised" size="small" onClick={e => this.handleSave(e)}>SAVE</Button>

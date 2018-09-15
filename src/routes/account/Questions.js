@@ -54,12 +54,11 @@ class Questions extends PureComponent {
     const { selectedPoll, currentUser } = this.props
     const votedOptionOne = selectedPoll.optionOne.votes.find(d => d === currentUser.id);
     const votedOptionTwo = selectedPoll.optionTwo.votes.find(d => d === currentUser.id);
-    
-	const totalVotes = selectedPoll.optionOne.votes.length > 0 && selectedPoll.optionTwo.votes.length > 0 ? selectedPoll.optionOne.votes.length + selectedPoll.optionTwo.votes.length : 0;
+    	
+	const totalVotes = selectedPoll.optionOne.votes && selectedPoll.optionTwo.votes ? selectedPoll.optionOne.votes.length + selectedPoll.optionTwo.votes.length : 0;
 
-	const percentVoteOptionOne = selectedPoll.optionOne.votes.length > 0 && selectedPoll.optionTwo.votes.length > 0 ? Math.round((selectedPoll.optionOne.votes.length / totalVotes) * 100) : 0;
-
-    const percentVoteOptionTwo = selectedPoll.optionTwo.votes.length > 0 ? Math.round((selectedPoll.optionTwo.votes.length / totalVotes) * 100) : 0;
+	const percentVoteOptionOne = selectedPoll.optionOne.votes ? Math.round((selectedPoll.optionOne.votes.length / totalVotes) * 100) : 0;	
+    const percentVoteOptionTwo = selectedPoll.optionTwo.votes ? Math.round((selectedPoll.optionTwo.votes.length / totalVotes) * 100) : 0;
 	
   	return (
       <AccountContainerWithStyles>

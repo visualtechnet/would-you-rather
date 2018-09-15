@@ -3,7 +3,8 @@ import {
   GET_CATEGORY_POLLS,
   SET_POLL_QUESTION,
   SAVE_POLL_ANSWER,
-  ADD_POLL_QUESTION
+  ADD_POLL_QUESTION,
+  SORT_POLL
 } from './../../constants/ActionTypes'
 
 import _ from 'lodash'
@@ -25,52 +26,57 @@ export const poll = (state = settings, action) => {
         for(var key in data) {
         	polls.push(data[key]);	
         }
-      
+      	      
+      	const mappedPolls = polls.map(poll => {
+        	return {
+            	...poll,
+              	createdDate: new Date(poll.timestamp)
+            }
+        })
+      	const sortedPolls = _.orderBy(mappedPolls, 'createdDate', 'desc')
+      	      
     	return { 
           ...state,
-          polls
+          polls: sortedPolls
         }
     }
     case GET_CATEGORY_POLLS: {
       const currentUser = data;
-      const allPolls = state.polls;
-	  // console.log('All Users', allUsers)         
-      // console.log('Current User', currentUser)
-      // console.log('All Optione One votes', allPolls[0].optionOne.votes);
-      // console.log('Finding Sarahedo', allPolls[0].optionOne.votes.find(user => user === currentUser))
-      // console.log(allPolls.filter(poll => poll.optionOne.votes.find(user => user===currentUser) !== undefined))
+      const allPolls = state.polls;	  
       const unansweredPolls = allPolls.filter(poll => poll.optionOne.votes.find(user => user===currentUser) === undefined && poll.optionTwo.votes.find(user => user===currentUser) === undefined)
       const answeredPolls = allPolls.filter(poll => poll.optionOne.votes.find(user => user===currentUser) !== undefined || poll.optionTwo.votes.find(user => user===currentUser) !== undefined)
-      
-      const sortedAnswer = _.orderBy(answeredPolls, 'timestamp', 'desc')
-      const sortedUnanswer = _.orderBy(unansweredPolls, 'timestamp', 'desc')
-            
-      const userAnswerWithPhoto = sortedAnswer.map((answerWithUser) => {            
+                  
+      const userAnswerWithPhoto = answeredPolls.map((answerWithUser) => {            
         const currentAvatar = allUsers[answerWithUser.author] && allUsers[answerWithUser.author].avatarURL
         const currentName = allUsers[answerWithUser.author] && allUsers[answerWithUser.author].name
         
       	return {
           ...answerWithUser,
           name: currentName,
-          photo: currentAvatar
+          photo: currentAvatar,
+          createdDate: new Date(answerWithUser.timestamp)
         }
       });
       
-      const userUnanswerWithPhoto = sortedUnanswer.map((unanswerWithUser) => {        
+      const userUnanswerWithPhoto = unansweredPolls.map((unanswerWithUser) => {        
       	const currentAvatar = allUsers[unanswerWithUser.author] && allUsers[unanswerWithUser.author].avatarURL
         const currentName = allUsers[unanswerWithUser.author] && allUsers[unanswerWithUser.author].name
 
         return {
           	...unanswerWithUser,
           	name: currentName,
-        	photo: currentAvatar
+        	photo: currentAvatar,
+          	createdDate: new Date(unanswerWithUser.timestamp)
         }
-      });
+      });           
+      
+      const sortedAnswered = _.orderBy(userAnswerWithPhoto, 'createdDate', 'desc')      
+      const sortedUnaswered = _.orderBy(userUnanswerWithPhoto, 'createdDate', 'desc')      
       
       return {
       	...state,
-        answeredPolls: userAnswerWithPhoto,
-        unansweredPolls: userUnanswerWithPhoto
+        answeredPolls: sortedAnswered,
+        unansweredPolls: sortedUnaswered
       }
       
       
@@ -95,6 +101,12 @@ export const poll = (state = settings, action) => {
            	  ...state.polls,
              data
            ]
+        }
+    }
+    case SORT_POLL: {
+    	return {
+        	...state,
+          	polls: data
         }
     }
     default: {

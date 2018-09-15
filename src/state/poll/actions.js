@@ -4,15 +4,19 @@ import {
   GET_CATEGORY_POLLS,
   SET_POLL_QUESTION,
   SAVE_POLL_ANSWER,
-  ADD_POLL_QUESTION
+  ADD_POLL_QUESTION,
+  SORT_POLL
 } from './../../constants/ActionTypes'
+import _ from 'lodash'
 
 export function getPolls() {
 	return async function(dispatch) {
-	   return await _getQuestions().then((result) => {
+	   return await _getQuestions().then((result) => { 
+         const sortedPoll = _.orderBy(result, 'timestamp', 'desc')
+         
        	dispatch({
         	type: GET_POLLS,
-          	data: result
+          	data: sortedPoll
         })
        });
     }
@@ -20,6 +24,7 @@ export function getPolls() {
 
 export function getCategoryPolls(user, allUsers) {
 	return function(dispatch) {
+      	      
     	dispatch({
         	type: GET_CATEGORY_POLLS,
           	data: user,
@@ -53,5 +58,15 @@ export function AddPollQuestion(poll) {
         	type: ADD_POLL_QUESTION,
           	data: poll
         });
+    }
+}
+
+export function sortPoll(polls) {
+	return function(dispatch) {
+      	const sortedPoll = _.orderBy(polls, 'timestamp', 'desc')
+    	dispatch({
+          type: SORT_POLL,
+          data: sortedPoll
+        })
     }
 }

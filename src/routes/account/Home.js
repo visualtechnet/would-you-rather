@@ -65,7 +65,7 @@ class Home extends PureComponent {
           getUsers().then(() => {              	
             getCategoryPolls(user && user.id, users);
           })
-        }
+        }		
     }
   
   	toggle = (section) => {      	
@@ -102,7 +102,7 @@ class Home extends PureComponent {
                                             <a key={poll.id} onClick={e => this.onQuestion(poll)} style={{ cursor: 'pointer'}}>
                                               <ListItem>	
                                                 <Avatar src={poll.photo}></Avatar>									
-                                                <ListItemText primary={`${poll.name} (${poll.author})`} secondary={`Created on ${moment.parseZone(poll.timestamp).format("MM/DD/YYYY HH:MM A")}`} />
+                                                <ListItemText primary={`${poll.name} (${poll.author})`} secondary={`Created on ${moment.parseZone(poll.createdDate).format("MM/DD/YYYY HH:MM A")}`} />
                                               </ListItem>
                                             </a>	
                                           )

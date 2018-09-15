@@ -4,6 +4,7 @@ import { ContainerWithStyles } from '../components'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Grid, FormControl, InputLabel, Typography, Button, Select, MenuItem } from '@material-ui/core'
+import { loadPage } from '../state/navigation/actions'
 import { getUsers, loadUser } from '../state/login/actions'
 
 class Login extends PureComponent {
@@ -24,15 +25,16 @@ class Login extends PureComponent {
  componentDidMount() {
  	const { getUsers } = this.props
 
-	getUsers();	
+	getUsers();		
  }
 
   login = () => {
-    const { history, loadUser, users } = this.props;    
+    const { history, loadUser, users, loadPage } = this.props;    
     const selectedUser = users.find(user => user.id === this.state.selectedUser);
         
     loadUser(selectedUser);
   	history.push('/home')
+    loadPage(0);
   }
   
   render() {
@@ -77,7 +79,8 @@ class Login extends PureComponent {
 Login.propTypes = {
   users: PropTypes.array.isRequired,
   loadUser: PropTypes.any,
-  getUser: PropTypes.any
+  getUser: PropTypes.any,
+  loadPage: PropTypes.any
 }
 
 const mapStateToProps = state => ({
@@ -88,7 +91,8 @@ const mapDispatchToProps = dispatch =>
 bindActionCreators(
   {
 	getUsers,
-    loadUser 
+    loadUser,
+    loadPage
   }, dispatch)
 
 Login = connect(mapStateToProps, mapDispatchToProps)(Login)

@@ -9,15 +9,16 @@ import _ from 'lodash'
 
 class PrivateRoute extends PureComponent {
   	render() {      
-      const { component: Component, ...rest } = this.props
-      const { authUser } = this.props
+      const { component: Component, ...rest } = this.props      
+      const { authUser, history } = this.props
       const isAuth = authUser !== undefined && _.isEmpty(authUser) === false ? true : false
-      
+      const isHash = history.location.hash.length > 0 && history.location.hash === "#/"
+                  
       return (
           <Route
             {...rest}
             render={props =>
-              isAuth ? (
+              isAuth && !isHash ? (
                 <Component {...props} />
               ) : (
                 <Redirect
