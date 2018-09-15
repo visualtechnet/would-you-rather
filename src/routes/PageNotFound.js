@@ -1,26 +1,19 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { Grid, Typography, Button } from '@material-ui/core'
 import { withRouter } from 'react-router-dom'
 
-class PageNotFound extends PureComponent {
-  goBack = () => {
-    const { history } = this.props
-    
+const goBack = (history) => {
     history.push('/home');
-  }
+}
 
-  render() {
-  	return (
+const PageNotFound = ({ history }) => (
       <Grid container style={{ flexDirection: "column",  }} justify="center" alignItems="center">
     	<Typography variant="display4">
       		Page Not Found
       	</Typography>
-      	<Button color="primary" variant="raised" onClick={e => this.goBack()}>GO HOME</Button>
+      	<Button color="primary" variant="raised" onClick={e => goBack(history)}>GO HOME</Button>
       </Grid>
     )
-  }
-}
 
-PageNotFound = withRouter(PageNotFound);
-
-export default PageNotFound;
+const PageNotFoundWithRouter = withRouter(PageNotFound)  
+export default PageNotFoundWithRouter;

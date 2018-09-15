@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'proptypes'
 import { Grid, Typography, TextField, Button } from '@material-ui/core'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { AccountContainer } from '../../components'
+import { AccountContainerWithStyles } from '../../components'
 import { withRouter } from 'react-router'
 import { AddPollQuestion } from '../../state/poll/actions'
 import { generateUID } from '../../utilities'
@@ -51,7 +52,7 @@ class AddQuestion extends PureComponent {
   
 	render() {
     	return (
-      		<AccountContainer>
+      		<AccountContainerWithStyles>
               <Grid container direction="column">          		
                   <Grid item>                      
                       <Grid container direction="column" justify="center" alignItems="center">
@@ -67,9 +68,14 @@ class AddQuestion extends PureComponent {
                       </Grid>
                   </Grid>
             </Grid>
-		  </AccountContainer>
+		  </AccountContainerWithStyles>
         )
     }
+}
+
+AddQuestion.propTypes = {
+	currentUser: PropTypes.object,
+  	AddPollQuestion: PropTypes.any
 }
 
 const mapStateToProps = state => ({

@@ -7,7 +7,7 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { AccountContainer } from '../../components'
+import { AccountContainerWithStyles } from '../../components'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getPolls, getCategoryPolls, setPollQuestion } from '../../state/poll/actions'
@@ -85,7 +85,7 @@ class Home extends PureComponent {
       	const { unansweredPolls, answeredPolls, classes } = this.props
         
     	return (
-          <AccountContainer>          
+          <AccountContainerWithStyles>          
             <Grid container spacing={8} direction="column">              
               <Grid item>
                   <ExpansionPanel defaultExpanded={true}>
@@ -99,7 +99,7 @@ class Home extends PureComponent {
                                   {
                                       unansweredPolls.map(poll => {
                                           return (                 					
-                                            <a key={poll.id} onClick={e => this.onQuestion(poll)}>
+                                            <a key={poll.id} onClick={e => this.onQuestion(poll)} style={{ cursor: 'pointer'}}>
                                               <ListItem>	
                                                 <Avatar src={poll.photo}></Avatar>									
                                                 <ListItemText primary={`${poll.name} (${poll.author})`} secondary={`Created on ${moment.parseZone(poll.timestamp).format("MM/DD/YYYY HH:MM A")}`} />
@@ -123,7 +123,7 @@ class Home extends PureComponent {
                                   {
                                       answeredPolls.map(poll => {
                                           return (
-                                            <a key={poll.id} onClick={e => this.onQuestion(poll)}>
+                                            <a key={poll.id} onClick={e => this.onQuestion(poll)} style={{ cursor: 'pointer'}}>
                                               <ListItem>	
                                                 <Avatar src={poll.photo}></Avatar>
                                                 <ListItemText primary={poll.author} secondary={`Created on ${moment.parseZone(poll.timestamp).format("MM/DD/YYYY HH:MM A")}`} />
@@ -138,7 +138,7 @@ class Home extends PureComponent {
                   </ExpansionPanel>
               </Grid>
             </Grid>
-		 </AccountContainer>
+		 </AccountContainerWithStyles>
         )
     }
 }

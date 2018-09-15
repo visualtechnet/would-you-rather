@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'proptypes'
 import { Grid, Typography, Avatar } from '@material-ui/core'
 import { bindActionCreators } from 'redux'
-import { AccountContainer } from '../../components'
+import { AccountContainerWithStyles } from '../../components'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
@@ -22,7 +22,7 @@ class Leaderboard extends PureComponent {
       	const { leaderboardList } = this.props
         
     	return (
-          	<AccountContainer>
+          	<AccountContainerWithStyles>
               <Grid container direction="column">          		
                   <Grid item>
                       <Grid container direction="column" spacing={24} justify="center" alignItems="center">
@@ -62,7 +62,7 @@ class Leaderboard extends PureComponent {
                       </Grid>
                   </Grid>
               </Grid>
-			</AccountContainer>
+			</AccountContainerWithStyles>
         )
     }
 }

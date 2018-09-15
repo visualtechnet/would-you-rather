@@ -4,7 +4,7 @@ import createBrowserHistory from 'history/createBrowserHistory'
 import Login from './Login'
 import { Home, AddQuestion, Questions, Leaderboard } from './account'
 import { PrivateRoute } from '../components'
-import PageNotFound from './PageNotFound'
+import PageNotFoundWithRouter from './PageNotFound'
 
 const history = createBrowserHistory()
 
@@ -20,7 +20,7 @@ class App extends PureComponent {
 		  <PrivateRoute exact component={Questions} path="/questions/:id" />
 		  <PrivateRoute exact component={AddQuestion} path="/questions/add" />
 		  <PrivateRoute exact component={Leaderboard} path="/leaderboard" />
-		  <Route exact component={PageNotFound} path="/page-not-found" />
+		  <Route exact component={PageNotFoundWithRouter} path="/page-not-found" />
 		  <Route component={Login} />
       	</Switch>
       </Router>

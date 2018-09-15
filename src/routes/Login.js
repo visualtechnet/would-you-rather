@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'proptypes'
-import { Container } from '../components'
+import { ContainerWithStyles } from '../components'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Grid, FormControl, InputLabel, Typography, Button, Select, MenuItem } from '@material-ui/core'
@@ -39,7 +39,7 @@ class Login extends PureComponent {
     const { users } = this.props
 
     return (
-      <Container>
+      <ContainerWithStyles>
        	<form onSubmit={this.login}>
           <Grid container spacing={8} direction="column" justify="center" alignItems="center">
               <Grid item>
@@ -69,7 +69,7 @@ class Login extends PureComponent {
               </Grid>
           </Grid>
        	</form>
-      </Container>
+      </ContainerWithStyles>
     )
   }
 }

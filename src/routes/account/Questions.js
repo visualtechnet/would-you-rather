@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'proptypes'
 import { Grid, Typography, Avatar, Button } from '@material-ui/core'
 import ThumbUp from '@material-ui/icons/ThumbUp'
-import { AccountContainer } from '../../components'
+import { AccountContainerWithStyles } from '../../components'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
@@ -62,7 +62,7 @@ class Questions extends PureComponent {
     const percentVoteOptionTwo = selectedPoll.optionTwo.votes.length > 0 ? Math.round((selectedPoll.optionTwo.votes.length / totalVotes) * 100) : 0;
 	
   	return (
-      <AccountContainer>
+      <AccountContainerWithStyles>
          <Grid container spacing={8} direction="column">        
             <Grid item>          
                     <Grid container direction="column" justify="center" alignItems="center">
@@ -102,7 +102,7 @@ class Questions extends PureComponent {
                     </Grid>			
             </Grid>
          </Grid>        
-	</AccountContainer>)
+	</AccountContainerWithStyles>)
   }
 }
 
