@@ -13,11 +13,11 @@ class Header extends PureComponent {
   	return (
       <Grid container spacing={8} alignItems="center" className={classes.header}>
       	<Grid item sm={6} className={classes.leftAligned}>
-    		<Link to='/account/home'><Typography variant="title">Would You Rather??</Typography></Link>
+    		<Link to='/home'><Typography variant="title">Would You Rather??</Typography></Link>
       	</Grid>
       	<Grid item sm={6} className={classes.rightAligned}>
-			<Avatar alt={user.name} src={user.avatarURL} />&nbsp;&nbsp;
-      		Hi { user.name }
+			 <Avatar alt={user && user.name} src={user && user.avatarURL} />&nbsp;&nbsp;
+      		 Hi { user && user.name }
       		<Navigation />
       	</Grid>
       </Grid>
@@ -27,7 +27,7 @@ class Header extends PureComponent {
 
 Header.propTypes = {
 	classes: PropTypes.any,
-  	user: PropTypes.object.isRequired
+  	user: PropTypes.object
 }
 
 const mapStateToProps = state => ({

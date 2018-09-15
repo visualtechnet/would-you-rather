@@ -14,7 +14,7 @@ let users = {
   tylermcginnis: {
     id: 'tylermcginnis',
     name: 'Tyler McGinnis',
-    avatarURL: 'https://imgix.ranker.com/user_node_img/70/1398554/original/kurt-russell-people-in-tv-photo-u16?w=650&q=50&fm=jpg&fit=crop&crop=faces',
+    avatarURL: 'https://avatarfiles.alphacoders.com/125/125435.png',
     answers: {
       "vthrdm985a262al8qx3do": 'optionOne',
       "xj352vofupe1dqz9emx13r": 'optionTwo',

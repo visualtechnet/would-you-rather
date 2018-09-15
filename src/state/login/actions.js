@@ -1,5 +1,5 @@
 import { allUsers } from 'data/_DATA'
-import { GET_USERS, LOAD_USER } from 'constants/ActionTypes'
+import { GET_USERS, LOAD_USER, CLEAR_LOGIN } from 'constants/ActionTypes'
 
 export function getUsers () {  
 	return function(dispatch) {      
@@ -14,6 +14,14 @@ export function loadUser (user) {
     	return dispatch({ 
           type: LOAD_USER,
           data: user
+        })
+    }
+}
+
+export function clearLogin () {
+	return function(dispatch) {
+    	return dispatch({
+        	type: CLEAR_LOGIN
         })
     }
 }

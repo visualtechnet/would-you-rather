@@ -16,3 +16,4 @@ export const REMOVE_POLL_ANSWER = 'REMOVE_POLL_ANSWER';
 export const LOAD_LEADERBOARD = 'LOAD_LEADERBOARD';
 
 export const SET_PAGE = 'SET_PAGE';
+export const CLEAR_LOGIN = 'CLEAR_LOGIN'

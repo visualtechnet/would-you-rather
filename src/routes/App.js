@@ -3,6 +3,7 @@ import { Router, Route, Switch } from 'react-router-dom'
 import createBrowserHistory from 'history/createBrowserHistory'
 import Login from './Login'
 import { Home, AddQuestion, Questions, Leaderboard } from './account'
+import { PrivateRoute } from '../components'
 import PageNotFound from './PageNotFound'
 
 const history = createBrowserHistory()
@@ -13,12 +14,12 @@ class App extends PureComponent {
       <Router history={history}>
       	<Switch>      	  
 		  <Route exact component={Home} path="/" />      	  
-		  <Route exact component={Home} path="/account/home" />      	  
+		  <PrivateRoute exact component={Home} path="/home" />      	  
           <Route exact component={Login} path="/login" />          
-      	  <Route exact component={AddQuestion} path="/account/add" />
-		  <Route exact component={Questions} path="/account/questions/:id" />
-		  <Route exact component={AddQuestion} path="/account/questions/add" />
-		  <Route exact component={Leaderboard} path="/account/leaderboard" />
+      	  <PrivateRoute exact component={AddQuestion} path="/add" />
+		  <PrivateRoute exact component={Questions} path="/questions/:id" />
+		  <PrivateRoute exact component={AddQuestion} path="/questions/add" />
+		  <PrivateRoute exact component={Leaderboard} path="/leaderboard" />
 		  <Route exact component={PageNotFound} path="/page-not-found" />
 		  <Route component={Login} />
       	</Switch>

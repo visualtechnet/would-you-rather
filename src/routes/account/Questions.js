@@ -10,7 +10,7 @@ import { savePollAnswer, getCategoryPolls } from '../../state/poll/actions'
 
 class Questions extends PureComponent {
 
-  componentWillMount() {
+  componentDidMount() {
   	const { match, polls, history } = this.props
     const isFound = polls.find(d => d.id === match.params.id)
     
@@ -51,14 +51,15 @@ class Questions extends PureComponent {
   };
   
   render() {        
-    const { selectedPoll, currentUser, users } = this.props
+    const { selectedPoll, currentUser } = this.props
     const votedOptionOne = selectedPoll.optionOne.votes.find(d => d === currentUser.id);
     const votedOptionTwo = selectedPoll.optionTwo.votes.find(d => d === currentUser.id);
-   
-    const usersArr = Object.keys(users).map(i => users[i])
+    
+	const totalVotes = selectedPoll.optionOne.votes.length > 0 && selectedPoll.optionTwo.votes.length > 0 ? selectedPoll.optionOne.votes.length + selectedPoll.optionTwo.votes.length : 0;
 
-    const percentVoteOptionOne = selectedPoll.optionOne.votes.length > 0 ? Math.round((selectedPoll.optionOne.votes.length / usersArr.length) * 100) : 0;
-    const percentVoteOptionTwo = selectedPoll.optionTwo.votes.length > 0 ? Math.round((selectedPoll.optionTwo.votes.length / usersArr.length) * 100) : 0;
+	const percentVoteOptionOne = selectedPoll.optionOne.votes.length > 0 && selectedPoll.optionTwo.votes.length > 0 ? Math.round((selectedPoll.optionOne.votes.length / totalVotes) * 100) : 0;
+
+    const percentVoteOptionTwo = selectedPoll.optionTwo.votes.length > 0 ? Math.round((selectedPoll.optionTwo.votes.length / totalVotes) * 100) : 0;
 	
   	return (
       <AccountContainer>
@@ -96,7 +97,7 @@ class Questions extends PureComponent {
                           </Grid>
                         </Grid><br />
                         <Grid item>
-                            <Link to="/account/home">Go Back</Link>
+                            <Link to="/home">Go Back</Link>
                         </Grid>
                     </Grid>			
             </Grid>

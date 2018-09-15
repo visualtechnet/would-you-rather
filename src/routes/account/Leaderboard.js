@@ -12,7 +12,7 @@ import { getUsers } from '../../state/user/actions'
 
 class Leaderboard extends PureComponent {
   	
-  	componentWillMount() {
+  	componentDidMount() {
     	const { LoadLeaderboard, users, polls } = this.props
         
         LoadLeaderboard(users, polls);
@@ -35,7 +35,7 @@ class Leaderboard extends PureComponent {
                             {
                                 leaderboardList.map(user => {
                                     return (
-                                        <Grid container direction="column" spacing={16}>
+                                        <Grid key={user.name} container direction="column" spacing={16}>
                                           <Grid item>
                                               <Avatar src={user.photo}></Avatar>
                                           </Grid>

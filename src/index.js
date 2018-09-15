@@ -6,7 +6,7 @@ import createHistory from 'history/createHashHistory';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import { save, load } from 'redux-localstorage-simple'
+import { load, save } from 'redux-localstorage-simple'
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import reducers from './state';

@@ -5,13 +5,13 @@ import {
   withRouter
 } from "react-router-dom";
 import { connect } from 'react-redux';
-import _ from 'lodash';
+import _ from 'lodash'
 
 class PrivateRoute extends PureComponent {
   	render() {      
       const { component: Component, ...rest } = this.props
       const { authUser } = this.props
-      const isAuth = !authUser && _.isEmpty(authUser);
+      const isAuth = authUser !== undefined && _.isEmpty(authUser) === false ? true : false
       
       return (
           <Route

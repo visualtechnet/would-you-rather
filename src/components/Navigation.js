@@ -1,9 +1,13 @@
 import React, { PureComponent } from 'react'
 import { withStyles, Menu, MenuItem, IconButton, Paper, ClickAwayListener } from '@material-ui/core'
 import { withRouter } from 'react-router-dom'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { clear } from 'redux-localstorage-simple'
 import { Link } from 'react-router-dom'
 import IconMenu from '@material-ui/icons/Menu'
 import { styles } from '../assets/styles'
+import { clearLogin } from '../state/login/actions'
 
 class Navigation extends PureComponent {
   constructor(props) {
@@ -23,8 +27,10 @@ class Navigation extends PureComponent {
   }
 
   logOut = () => {
-  	const { history } = this.props;
-        
+  	const { history, clearLogin } = this.props;
+      
+    clear();
+    clearLogin();
     history.push('/login');
   }
 
@@ -49,9 +55,9 @@ class Navigation extends PureComponent {
                 anchorEl={this.state.anchorEl}
                 open={Boolean(this.state.anchorEl)}
                 onClose={this.handleCloseNav}>
-                <Link to="/account/home"><MenuItem>Home</MenuItem></Link>
-                <Link to="/account/add"><MenuItem>Add</MenuItem></Link>				
-				<Link to="/account/leaderboard"><MenuItem>Leaderboard</MenuItem></Link>				
+                <Link to="/home"><MenuItem>Home</MenuItem></Link>
+                <Link to="/add"><MenuItem>Add</MenuItem></Link>				
+				<Link to="/leaderboard"><MenuItem>Leaderboard</MenuItem></Link>				
                 <MenuItem onClick={this.logOut}>Log Out</MenuItem>
               </Menu>
            </Paper>
@@ -61,6 +67,14 @@ class Navigation extends PureComponent {
   }
 }
 
-Navigation = withRouter(withStyles(styles)(Navigation))
+const mapStateToProps = state => ({
+
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+	clearLogin
+}, dispatch)
+
+Navigation = connect(mapStateToProps, mapDispatchToProps)(withRouter(withStyles(styles)(Navigation)))
 
 export { Navigation }

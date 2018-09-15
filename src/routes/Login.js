@@ -21,7 +21,7 @@ class Login extends PureComponent {
   	this.setState({ [event.target.name]: event.target.value })    
   }
 
- componentWillMount() {
+ componentDidMount() {
  	const { getUsers } = this.props
 
 	getUsers();	
@@ -32,7 +32,7 @@ class Login extends PureComponent {
     const selectedUser = users.find(user => user.id === this.state.selectedUser);
         
     loadUser(selectedUser);
-  	history.push('account/home')
+  	history.push('/home')
   }
   
   render() {

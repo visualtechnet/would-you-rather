@@ -1,6 +1,7 @@
 import {
   GET_USERS,
-  LOAD_USER
+  LOAD_USER,
+  CLEAR_LOGIN
 } from './../../constants/ActionTypes'
 const settings = {
   user: {},
@@ -26,6 +27,13 @@ export const login = (state = settings, action) => {
         return {
         ...state,
          user: data
+        }
+      }
+      case CLEAR_LOGIN: {
+      	return { 
+          	...state,
+        	user: undefined,
+        	users: []
         }
       }
       default: {

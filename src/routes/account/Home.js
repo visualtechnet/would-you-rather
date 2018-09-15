@@ -52,18 +52,18 @@ class Home extends PureComponent {
       });
     };
   
-  	componentWillMount() {
+  	componentDidMount() {
   		const { polls, getPolls, getCategoryPolls, getUsers, user, users } = this.props;
         
       	if(polls.length === 0) {
           getPolls().then(() => {
               getUsers().then(() => {              	
-                  getCategoryPolls(user.id, users);
+                  getCategoryPolls(user && user.id, users);
               })
           });
         } else {
           getUsers().then(() => {              	
-            getCategoryPolls(user.id, users);
+            getCategoryPolls(user && user.id, users);
           })
         }
     }
@@ -76,7 +76,7 @@ class Home extends PureComponent {
       const { history, setPollQuestion } = this.props
             
       setPollQuestion(poll)
-      history.push(`/account/questions/${poll.id}`);
+      history.push(`/questions/${poll.id}`);
       
       return false;
     }

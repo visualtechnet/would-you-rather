@@ -34,17 +34,17 @@ class MainNavigation  extends PureComponent {
       switch(value) {
         case ADD_POLL_PAGE: {
           	loadPage(ADD_POLL_PAGE);
-            history.push('/account/add');
+            history.push('/add');
         	break;
         }
         case LEADERBOARD_PAGE: {
           	loadPage(LEADERBOARD_PAGE);
-            history.push('/account/leaderboard');
+            history.push('/leaderboard');
         	break;
         }
         default: {
           	loadPage(HOMEPAGE);
-        	history.push('/account/home');        	
+        	history.push('/home');        	
         }
       }
     }
