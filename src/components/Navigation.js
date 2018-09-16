@@ -55,7 +55,7 @@ class Navigation extends PureComponent {
                 anchorEl={this.state.anchorEl}
                 open={Boolean(this.state.anchorEl)}
                 onClose={this.handleCloseNav}>
-                <Link to="/home"><MenuItem>Home</MenuItem></Link>
+                <Link to="/"><MenuItem>Home</MenuItem></Link>
                 <Link to="/add"><MenuItem>Add</MenuItem></Link>				
 				<Link to="/leaderboard"><MenuItem>Leaderboard</MenuItem></Link>				
                 <MenuItem onClick={this.logOut}>Log Out</MenuItem>

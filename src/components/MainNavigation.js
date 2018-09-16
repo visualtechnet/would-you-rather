@@ -44,7 +44,7 @@ class MainNavigation  extends PureComponent {
         }
         default: {
           	loadPage(HOMEPAGE);
-        	history.push('/home');        	
+        	history.push('/');        	
         }
       }
     }

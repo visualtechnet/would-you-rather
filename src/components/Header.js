@@ -13,7 +13,7 @@ class Header extends PureComponent {
   	return (
       <Grid container spacing={8} alignItems="center" className={classes.header}>
       	<Grid item sm={6} className={classes.leftAligned}>
-    		<Link to='/home'><Typography variant="title">Would You Rather??</Typography></Link>
+    		<Link to='/'><Typography variant="title">Would You Rather??</Typography></Link>
       	</Grid>
       	<Grid item sm={6} className={classes.rightAligned}>
 			 <Avatar alt={user && user.name} src={user && user.avatarURL} />&nbsp;&nbsp;

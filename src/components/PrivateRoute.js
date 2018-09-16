@@ -13,21 +13,20 @@ class PrivateRoute extends PureComponent {
       const { authUser, history } = this.props
       const isAuth = authUser !== undefined && _.isEmpty(authUser) === false ? true : false
       const isHash = history.location.hash.length > 0 && history.location.hash === "#/"
-                  
+      
+      console.log(history)
       return (
           <Route
             {...rest}
             render={props =>
               isAuth && !isHash ? (
                 <Component {...props} />
-              ) : (
-                <Redirect
-                  to={{
-                    pathname: "/login",
-                    state: { from: props.location }
-                  }}
-                />
-              )
+              ) : (<Redirect
+                    to={{
+                      pathname: "/login",
+                      state: { from: props.location.pathname }
+                    }}
+                  />)
             }
           />)
 	}

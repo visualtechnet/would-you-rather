@@ -15,7 +15,6 @@ class App extends PureComponent {
       	<Switch>      	  
 		  <Route exact component={Login} path="/login" />    
 		  <PrivateRoute exact component={Home} path="/" />
-		  <PrivateRoute exact component={Home} path="/home" />
       	  <PrivateRoute exact component={AddQuestion} path="/add" />
 		  <PrivateRoute exact component={Questions} path="/questions/:id" />
 		  <PrivateRoute exact component={AddQuestion} path="/questions/add" />

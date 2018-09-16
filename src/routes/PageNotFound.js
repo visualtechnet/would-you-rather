@@ -3,7 +3,7 @@ import { Grid, Typography, Button } from '@material-ui/core'
 import { withRouter } from 'react-router-dom'
 
 const goBack = (history) => {
-    history.push('/home');
+    history.push('/');
 }
 
 const PageNotFound = ({ history }) => (

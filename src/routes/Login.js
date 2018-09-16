@@ -32,8 +32,11 @@ class Login extends PureComponent {
     const { history, loadUser, users, loadPage } = this.props;    
     const selectedUser = users.find(user => user.id === this.state.selectedUser);
         
+    console.log(this.props.location)
+    const { state } = this.props.location
+    const location = state && state.from
     loadUser(selectedUser);
-  	history.push('/home')
+  	history.push(location || '/home')
     loadPage(0);
   }
   
